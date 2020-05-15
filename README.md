@@ -1,4 +1,4 @@
-# Simple Flutter Animation: Implicit & Explicit Animations\
+# Simple Flutter Animation: Implicit & Explicit Animations
 
 ## Getting Started
  Under Construction
