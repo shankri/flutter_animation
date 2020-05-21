@@ -11,7 +11,7 @@ class ZoomTweenAnimate extends StatefulWidget {
     Key key,
     @required this.child,
     this.durationInMilliseconds: 3000,
-    this.zoom: 2,
+    this.zoom: 1.5,
   }) : super(key: key);
 
   @override

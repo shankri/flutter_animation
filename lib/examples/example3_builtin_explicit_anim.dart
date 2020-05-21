@@ -31,13 +31,16 @@ class _BuiltInExplicitAnimationState extends State<BuiltInExplicitAnimation> wit
   }
 
   @override
-  Widget build(BuildContext context) => ScaleTransition(
-        scale: Tween<double>(begin: 0.3, end: 1).animate(_controller),
-        alignment: Alignment.center,
-        child: RotationTransition(
-          child: Image.asset('images/chakra.png'),
+  Widget build(BuildContext context) => Container(
+        constraints: BoxConstraints(maxHeight: 280),
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 0.3, end: 1).animate(_controller),
           alignment: Alignment.center,
-          turns: _controller,
+          child: RotationTransition(
+            child: Image.asset('images/chakra.png'),
+            alignment: Alignment.center,
+            turns: _controller,
+          ),
         ),
       );
 

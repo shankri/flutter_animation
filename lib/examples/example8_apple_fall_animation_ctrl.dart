@@ -42,7 +42,6 @@ class _AppleFallAnimationState extends State<AppleFallAnimation> with SingleTick
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[200],
       child: Stack(
         fit: StackFit.expand,
         children: [

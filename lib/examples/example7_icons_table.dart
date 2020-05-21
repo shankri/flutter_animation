@@ -4,7 +4,7 @@ import 'package:flutter_simple_animation/examples/example5_6_jiggle_tween_animat
 
 class IconsTable extends StatelessWidget {
   final int numOfCols = 4;
-  final int numOfRows = 5;
+  final int numOfRows = 3;
   final double margin = 20;
 
   const IconsTable({Key key}) : super(key: key);
@@ -65,14 +65,6 @@ class IconsTable extends StatelessWidget {
     'furious.png',
     'in_love_2.png',
     'sad_2.png',
-    'smile.png',
-    'happy.png',
-    'kiss.png',
-    'sad_3.png',
-    'surprised.png',
-    'happy_1.png',
-    'kiss_1.png',
-    'sad_4.png',
-    'surprised_2.png'
+    'smile.png'
   ];
 }

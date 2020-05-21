@@ -68,7 +68,7 @@ class CustomAnimatedWidget extends AnimatedWidget {
         );
 
   Widget build(BuildContext context) {
-    timeDilation = 2.0; // 1.0 is normal animation speed.
+    timeDilation = 1.5; // 1.0 is normal animation speed.
     return Center(
       child: Opacity(
         opacity: _opacityTween.value,

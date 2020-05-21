@@ -8,6 +8,7 @@ import 'package:flutter_simple_animation/examples/example5_6_jiggle_tween_animat
 import 'package:flutter_simple_animation/examples/example7_icons_table.dart';
 import 'package:flutter_simple_animation/examples/example8_apple_fall_animation_ctrl.dart';
 import 'package:flutter_simple_animation/examples/example9_apple_fall_tween_animation.dart';
+import 'package:flutter_simple_animation/x-card.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,54 +26,31 @@ class _MyAppState extends State<MyApp> {
       title: 'Simple Flutter Animation',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Lato',
+        canvasColor: Colors.grey[100],
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SafeArea(
           child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Color.fromRGBO(105, 121, 126, 1),
+          title: Text('Animation Samples', textScaleFactor: 1.2),
+          centerTitle: true,
+        ),
         body: Scrollbar(
           child: Align(
-            alignment: Alignment.topCenter,
+            alignment: AlignmentDirectional.topCenter,
             child: Container(
-              constraints: BoxConstraints(maxWidth: 1000),
-              width: double.maxFinite,
-              padding: EdgeInsets.fromLTRB(5, 20, 5, 20),
+              constraints: BoxConstraints(maxWidth: 1600),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+              alignment: Alignment.topCenter,
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text('ANIMATION SAMPLES', style: TextStyle(fontSize: Theme.of(context).textTheme.headline5.fontSize)),
-                    Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
-
-                    _addItem(context, ImplicitAnimation(),
-                        'EXAMPLE 1: IMPLICIT Animation \n\nAnimation mostly based on (user) events.\nIn the below example, change curve and size options to see animation. \n\nWidgets: AnimatedContainer, AnimatedOpacity, AnimatedAlign, AnimatedPositioned etc'),
-                    //..
-                    _addItem(context, _zoomTweenAnimationBuilderExample2(),
-                        'EXAMPLE 2: IMPLICIT Animation \n\nTweenAnimationBuilder:  Animation on load of a widget. It is not continous. \nBelow example uses Tween<double> and Transform.scale for zoom effect'),
-                    //..
-                    _addItem(context, BuiltInExplicitAnimation(),
-                        'EXAMPLE 3: Built-In EXPLICIT Animation \n\nScaleTransition & RotationTransition used with AnimatedController'),
-                    //..
-                    _addItem(context, _zoomTweenAnimationWithControllerExample4(),
-                        'EXAMPLE 4: EXPLICIT Animation \n\nVery similar to Example 2 but uses AnimationController and Tween<double>. Forward, Reverse and Continous effect is acheived through controller'),
-                    //....
-                    _addItem(context, _continousJiggleExample5And6(double.infinity),
-                        'EXAMPLE 5: EXPLICIT Animation \n\nUse of AnimationController and Tween<double> just like Example 4. This is continous animation.'),
-                    //....
-                    _addItem(context, _continousJiggleExample5And6(1),
-                        'EXAMPLE 6: EXPLICIT Animation \n\nSame as EXAMPLE 5 but stops after 2 jiggles using _controller.stop(canceled: true)'),
-                    //....
-                    _addItem(context, _iconTableExample7(), 'EXAMPLE 7: EXPLICIT Animation \n\nUsing both Zoom (Example 4) and Jiggle (Example 5) together'),
-                    //....
-                    _addItem(context, Container(child: AppleFallAnimation(), width: 500, height: 400, constraints: BoxConstraints(maxWidth: 450)),
-                        'EXAMPLE 8: EXPLICIT Animation \n\nAnimationController WITHOUT use of any Tween'),
-                    //....
-                    _addItem(context, Container(child: AppleFallTweenAnimation(), width: 500, height: 400, constraints: BoxConstraints(maxWidth: 450)),
-                        'EXAMPLE 9 \n\nAnimationController with AlignmentTween'),
-                    //....
-                    _addItem(context, Container(child: CustomAnimationExample(), width: 500, height: 400, constraints: BoxConstraints(maxWidth: 450)),
-                        'EXAMPLE 10 \n\nExtending AnimatedWidget + Staggered Animation'),
-                  ],
-                  //child: ImplicitAnimation(),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: _examples(context),
                 ),
               ),
             ),
@@ -82,37 +60,111 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _iconTableExample7() => Container(
-        constraints: BoxConstraints(minHeight: 200, maxWidth: 450),
-        child: Column(
-          children: [
-            IconsTable(key: Key(DateTime.now().millisecondsSinceEpoch.toString())),
-            Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-            RaisedButton(child: Text('Rebuild Widget'), onPressed: () => setState(() {})),
-          ],
-        ),
+  Widget _examples(context) => Wrap(
+        spacing: 45,
+        runSpacing: 45,
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.start,
+        children: [
+          ///example 1
+          XCard(
+            title: 'Implicit Animation using AnimatedContainer',
+            subTitle: 'Widgets: AnimatedContainer, AnimatedOpacity, AnimatedAlign, AnimatedPositioned etc',
+            footerInfo: 'Example 1',
+            child: ImplicitAnimation(),
+          ),
+
+          ///example 2
+          XCard(
+            title: 'Implicit Animation using TweenAnimation Builder',
+            subTitle:
+                'Uses Tween<double> and Transform.scale for zoom effect. This animation is on load and not continous please click on referesh icon (top right corner)',
+            footerInfo: 'Example 2',
+            refresh: () => setState(() {}),
+            child: _zoomTweenAnimationBuilderExample2(),
+          ),
+          //example 3
+          XCard(
+            title: 'Built in Explicit Animation',
+            subTitle: 'ScaleTransition & RotationTransition used with AnimatedController',
+            footerInfo: 'Example 3',
+            child: BuiltInExplicitAnimation(),
+          ),
+
+          ///example 4
+          XCard(
+            title: 'Explicit Animation',
+            subTitle: 'Very similar to Example 2 but uses AnimationController and Tween<double>. Forward, Reverse and Continous effect is acheived through controller',
+            footerInfo: 'Example 4',
+            child: _zoomTweenAnimationWithControllerExample4(),
+          ),
+          //example 5
+          XCard(
+            title: 'Explicit Animation',
+            subTitle: 'Use of AnimationController and Tween<double> similar to Example 4.',
+            footerInfo: 'Example 5',
+            child: _continousJiggleExample5And6(double.infinity),
+          ),
+
+          ///example 6
+          XCard(
+            title: 'Explicit Animation',
+            subTitle: 'Use of AnimationController and Tween<double> similar to Example 5. Stops after few jiggles using _controller.stop(canceled: true)',
+            footerInfo: 'Example 6',
+            child: _continousJiggleExample5And6(1),
+            refresh: () => setState(() {}),
+          ),
+
+          ///example 7
+          XCard(
+            title: 'Explicit Animation',
+            subTitle: 'Using both Zoom (Example 4) and Jiggle (Example 5) together',
+            footerInfo: 'Example 7',
+            child: IconsTable(key: Key(DateTime.now().millisecondsSinceEpoch.toString())),
+            refresh: () => setState(() {}),
+          ),
+
+          ///example 8
+          XCard(
+            title: 'Explicit Animation with AnimationController',
+            subTitle: 'Tween is not used in this example',
+            footerInfo: 'Example 8',
+            child: Container(child: AppleFallAnimation(), width: 500, height: 300),
+          ),
+
+          ///example 9
+          XCard(
+            title: 'Explicit Animation with AnimationController and Tween',
+            subTitle: 'AlignmentTween is used in this example',
+            footerInfo: 'Example 9',
+            child: Container(child: AppleFallTweenAnimation(), width: 500, height: 300),
+          ),
+
+          ///example 10
+          XCard(
+            title: 'Explicit Animation (custom)',
+            subTitle: 'Extending AnimatedWidget + Staggered Animation',
+            footerInfo: 'Example 10',
+            child: Container(child: CustomAnimationExample(), width: 500, height: 300),
+          )
+        ],
       );
 
-  Widget _zoomTweenAnimationBuilderExample2() => Container(
-        constraints: BoxConstraints(minHeight: 200),
-        child: Column(
-          children: [
-            Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-            ZoomTweenAnimationBuilder(
-              key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
-              child: Image.asset(
-                'images/apple.png',
-                width: 100,
-              ),
+  Widget _zoomTweenAnimationBuilderExample2() => Column(
+        children: [
+          Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
+          ZoomTweenAnimationBuilder(
+            key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+            child: Image.asset(
+              'images/apple.png',
+              width: 100,
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0, 80, 0, 0)),
-            RaisedButton(child: Text('Rebuild Widget'), onPressed: () => setState(() {}))
-          ],
-        ),
+          ),
+        ],
       );
 
-  Widget _zoomTweenAnimationWithControllerExample4() => Container(
-        constraints: BoxConstraints(minHeight: 200),
+  Widget _zoomTweenAnimationWithControllerExample4() => SizedBox(
+        height: 283,
         child: ZoomTweenAnimate(
           child: Image.asset(
             'images/apple.png',
@@ -121,46 +173,16 @@ class _MyAppState extends State<MyApp> {
         ),
       );
 
-  Widget _continousJiggleExample5And6(double max) => Container(
-        constraints: BoxConstraints(minHeight: 200),
-        child: Column(
-          children: [
-            JiggleTweenAnimate(
-              key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
-              maxJiggles: max,
-              child: Image.asset(
-                'images/apple.png',
-                width: 100,
-              ),
-            ),
-            if (max != double.infinity) Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-            if (max != double.infinity) RaisedButton(child: Text('Rebuild Widget'), onPressed: () => setState(() {}))
-          ],
-        ),
-      );
-
-  Widget _addItem(context, Widget child, String info) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+  Widget _continousJiggleExample5And6(double max) => Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              color: Colors.grey[800],
+          JiggleTweenAnimate(
+            key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+            maxJiggles: max,
+            child: Image.asset(
+              'images/apple.png',
+              width: 100,
             ),
-            width: double.maxFinite,
-            padding: EdgeInsets.all(10),
-            child: Text(info,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
-                  height: 1.8,
-                )),
           ),
-          Padding(padding: EdgeInsets.fromLTRB(5, 20, 5, 20)),
-          child,
-          Padding(padding: EdgeInsets.fromLTRB(5, 20, 5, 20)),
         ],
       );
 }

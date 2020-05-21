@@ -21,12 +21,11 @@ class _ImplicitAnimationState extends State<ImplicitAnimation> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _image(),
-          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
-          Text('select size', textScaleFactor: 1.2, style: TextStyle(color: Colors.grey[500])),
-          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
+          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 30)),
+          Text('select size', textScaleFactor: 1.2),
           _sizeDropdown(),
-          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
-          Text('select curve', textScaleFactor: 1.2, style: TextStyle(color: Colors.grey[500])),
+          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 30)),
+          Text('select curve', textScaleFactor: 1.2),
           _curveDropdown(),
         ],
       );
@@ -34,7 +33,7 @@ class _ImplicitAnimationState extends State<ImplicitAnimation> {
   Widget _image() => AnimatedContainer(
         decoration: BoxDecoration(
             gradient: RadialGradient(
-          colors: [Colors.red, Colors.transparent],
+          colors: [Colors.amber, Colors.transparent],
           stops: [currentSize > 250 ? 0.2 : 0.5, 1.0],
         )),
         width: currentSize,
