@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simple_animation/examples/example2_zoom_tween_animation_builder.dart';
-import 'package:flutter_simple_animation/examples/example5_6_jiggle_tween_animate.dart';
+import 'example2_zoom_tween_animation_builder.dart';
+import 'example5_6_jiggle_tween_animate.dart';
 
 class IconsTable extends StatelessWidget {
   final int numOfCols = 4;

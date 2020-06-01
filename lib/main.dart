@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simple_animation/examples/example10.dart';
-import 'package:flutter_simple_animation/examples/example1_implicit_animation.dart';
-import 'package:flutter_simple_animation/examples/example2_zoom_tween_animation_builder.dart';
-import 'package:flutter_simple_animation/examples/example3_builtin_explicit_anim.dart';
-import 'package:flutter_simple_animation/examples/example4_zoom_tween_animate.dart';
-import 'package:flutter_simple_animation/examples/example5_6_jiggle_tween_animate.dart';
-import 'package:flutter_simple_animation/examples/example7_icons_table.dart';
-import 'package:flutter_simple_animation/examples/example8_apple_fall_animation_ctrl.dart';
-import 'package:flutter_simple_animation/examples/example9_apple_fall_tween_animation.dart';
-import 'package:flutter_simple_animation/x-card.dart';
+import 'examples/example10.dart';
+import 'examples/example1_implicit_animation.dart';
+import 'examples/example2_zoom_tween_animation_builder.dart';
+import 'examples/example3_builtin_explicit_anim.dart';
+import 'examples/example4_zoom_tween_animate.dart';
+import 'examples/example5_6_jiggle_tween_animate.dart';
+import 'examples/example7_icons_table.dart';
+import 'examples/example8_apple_fall_animation_ctrl.dart';
+import 'examples/example9_apple_fall_tween_animation.dart';
+import 'x-card.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,21 +25,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Simple Flutter Animation',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Lato',
-        canvasColor: Colors.grey[100],
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: _themeData(),
       home: SafeArea(
           child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Color.fromRGBO(105, 121, 126, 1),
-          title: Text('Animation Samples', textScaleFactor: 1.2),
-          centerTitle: true,
-        ),
+        appBar: _appBar(),
         body: Scrollbar(
           child: Align(
             alignment: AlignmentDirectional.topCenter,
@@ -111,7 +100,7 @@ class _MyAppState extends State<MyApp> {
             title: 'Explicit Animation',
             subTitle: 'Use of AnimationController and Tween<double> similar to Example 5. Stops after few jiggles using _controller.stop(canceled: true)',
             footerInfo: 'Example 6',
-            child: _continousJiggleExample5And6(1),
+            child: _continousJiggleExample5And6(2),
             refresh: () => setState(() {}),
           ),
 
@@ -184,5 +173,20 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ],
+      );
+
+  ThemeData _themeData() => ThemeData(
+        fontFamily: 'Lato',
+        canvasColor: Colors.grey[100],
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
+
+  Widget _appBar() => AppBar(
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(105, 121, 126, 1),
+        title: Text('Animation Samples', textScaleFactor: 1.2),
+        centerTitle: true,
       );
 }

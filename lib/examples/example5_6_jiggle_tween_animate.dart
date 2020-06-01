@@ -68,7 +68,8 @@ class _JiggleTweenAnimateState extends State<JiggleTweenAnimate> with SingleTick
       ).animate(_controller)
         ..addStatusListener((status) => _handleAnimateStatus(status))
         ..addListener(() => setState(() {
-              if (jiggleCount > maxJiggles && (_animation.value as double).toStringAsFixed(3) == '0.000') {
+              ///just _animation.value == 0 works fine in android and ios but does not work in web
+              if (jiggleCount > maxJiggles /*&& (_animation.value as double).toStringAsPrecision(4) == '0.000'*/) {
                 _controller.stop(canceled: true);
               }
             }));
